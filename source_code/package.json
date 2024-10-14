@@ -4,9 +4,26 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "tsc -p tsconfig.prod.json && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint",
+    "lint:fix": "eslint '*/**/*.{js,jsx,ts,tsx}'",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
+    "prettier": "prettier --check \"src/**/(*.tsx|*.ts|*.jsx|*.js|*.css|*.json)\"",
+    "husky-install": "cd .. && husky install",
+    "precommit": "lint-staged",
+    "prepare": "cd .. && husky install"
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,ts,tsx,d.ts}": [
+      "npm run lint"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "cd source_code && npm run precommit",
+      "pre-push": "cd source_code && npm run build"
+    }
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
@@ -31,6 +48,8 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "postcss": "^8",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
