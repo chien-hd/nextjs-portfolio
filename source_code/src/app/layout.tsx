@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import AppProvider from './provider';
-import CSidebar from '@/components/layout/sidebar';
+import Sidebar from '@/components/layout/sidebar';
 
 export const metadata: Metadata = {
   title: 'Next.js Portfolio',
@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <AppProvider>
-          <CSidebar />
+          <Sidebar />
           {children}
         </AppProvider>
       </body>
